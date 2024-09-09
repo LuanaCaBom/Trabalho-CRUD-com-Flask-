@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+        <div class="mensagem">
+            {{ msg }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    
+    <section class="pagina">
+        <a href="/cursos/add">+ Adicionar</a>
+    </section>
+
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Duração em Horas</th>
+            <th>Custo</th>
+            <th>Edita</th>
+            <th>Remove</th>
+        </tr>
+        {% for cursos in dados %}
+        <tr>
+            <td>{{cursos.nome}}</td>
+            <td>{{cursos.duracao_horas}}</td>
+            <td>{{cursos.custo}}</td>
+            <td>
+                <a href="/cursos/edita/{{cursos.id_curso}}">Editar</a>
+            </td>
+            <td>
+                <a href="/cursos/remove/{{cursos.id_curso}}">Remover</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
